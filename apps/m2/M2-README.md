@@ -11,7 +11,7 @@
    - Tag.__setitem__
    - Tag.clear
 ### API being used in Milestone 2 part 1 additionally:
-   - SoupStrainer.__init__ (Contain parse_only)
+   - SoupStrainer.__init__
 ### API Locations (Original Source)
 - **BeautifulSoup.__init__**: `beautifulsoup/bs4/__init__.py`, line 209
 - **BeautifulSoup.prettify**: `beautifulsoup/bs4/element.py`, line 2601

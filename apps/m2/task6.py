@@ -13,7 +13,7 @@ elif file_extension == '.xml':
 else:
     sys.exit(1)
 
-# Replace b tags to blockquote tags
+# Replace b tags with blockquote tags
 replacer = SoupReplacer("b", "blockquote")
 
 try:
