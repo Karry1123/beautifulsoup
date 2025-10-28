@@ -182,6 +182,9 @@ class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
         tag = self.soup.handle_starttag(
             name, None, None, attr_dict, sourceline=sourceline, sourcepos=sourcepos
         )
+        # When a tag is created inside the parser
+        if self.soup.replacer is not None:
+            tag = self.soup.replacer.replace(tag)
         if tag and tag.is_empty_element and handle_empty_element:
             # Unlike other parsers, html.parser doesn't send separate end tag
             # events for empty-element tags. (It's handled in
@@ -209,6 +212,9 @@ class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
            be the closing portion of an empty-element tag,
            e.g. '<tag></tag>'.
         """
+        # When a tag is created inside the parser
+        if self.soup.replacer is not None:
+            name = self.soup.replacer.replace(name)
         # print("END", name)
         if check_already_closed and name in self.already_closed_empty_element:
             # This is a redundant end tag for an empty-element tag.

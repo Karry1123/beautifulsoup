@@ -319,7 +319,16 @@ class LXMLTreeBuilderForXML(TreeBuilder):
         # BeautifulSoup.feed(), and we know self.soup is set by the time feed()
         # is called.
         assert self.soup is not None
+        if isinstance(tag, bytes):
+            tag = tag.decode("utf-8")
+        if self.soup.replacer is not None:
+            if tag == self.soup.replacer.og_tag:
+                tag = self.soup.replacer.alt_tag
         assert isinstance(tag, str)
+
+        # When a tag is created inside the parser
+        if self.soup.replacer is not None:
+            tag = self.soup.replacer.replace(tag)
 
         # We need to recreate the attribute dict for three
         # reasons. First, for type checking, so we can assert there

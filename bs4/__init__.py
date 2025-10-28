@@ -215,6 +215,7 @@ class BeautifulSoup(Tag):
         from_encoding: Optional[_Encoding] = None,
         exclude_encodings: Optional[_Encodings] = None,
         element_classes: Optional[Dict[Type[PageElement], Type[PageElement]]] = None,
+        replacer = None,
         **kwargs: Any,
     ):
         """Constructor.
@@ -267,6 +268,8 @@ class BeautifulSoup(Tag):
          TreeBuilder by passing in arguments, not just by saying which
          one to use.
         """
+        self.replacer = replacer
+
         if "convertEntities" in kwargs:
             del kwargs["convertEntities"]
             warnings.warn(
@@ -1025,6 +1028,9 @@ class BeautifulSoup(Tag):
         ):
             return None
 
+        if self.replacer:
+            name = self.replacer.replace(name)
+
         tag_class = self.element_classes.get(Tag, Tag)
         # Assume that this is either Tag or a subclass of Tag. If not,
         # the user brought type-unsafety upon themselves.
@@ -1058,6 +1064,9 @@ class BeautifulSoup(Tag):
 
         :meta private:
         """
+        if self.replacer:
+            name = self.replacer.replace(name)
+
         # print("End tag: " + name)
         self.endData()
         self._popToTag(name, nsprefix)
