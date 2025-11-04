@@ -328,7 +328,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
 
         # When a tag is created inside the parser
         if self.soup.replacer is not None:
-            tag = self.soup.replacer.replace(tag)
+            tag = self.soup.replacer.replace_tag_name(tag)
 
         # We need to recreate the attribute dict for three
         # reasons. First, for type checking, so we can assert there

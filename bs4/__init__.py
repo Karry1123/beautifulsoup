@@ -1029,7 +1029,7 @@ class BeautifulSoup(Tag):
             return None
 
         if self.replacer:
-            name = self.replacer.replace(name)
+            name = self.replacer.replace_tag_name(name)
 
         tag_class = self.element_classes.get(Tag, Tag)
         # Assume that this is either Tag or a subclass of Tag. If not,
@@ -1048,6 +1048,11 @@ class BeautifulSoup(Tag):
             sourcepos=sourcepos,
             namespaces=namespaces,
         )
+
+        if self.replacer:
+            tag.attrs = self.replacer.replace_attrs(tag)
+            self.replacer.apply_xformer(tag)
+
         if tag is None:
             return tag
         if self._most_recent_element is not None:
@@ -1065,7 +1070,7 @@ class BeautifulSoup(Tag):
         :meta private:
         """
         if self.replacer:
-            name = self.replacer.replace(name)
+            name = self.replacer.replace_tag_name(name)
 
         # print("End tag: " + name)
         self.endData()
