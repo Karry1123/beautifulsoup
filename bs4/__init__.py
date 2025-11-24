@@ -1156,6 +1156,9 @@ class BeautifulSoup(Tag):
             indent_level, eventual_encoding, formatter, iterator
         )
 
+    def __iter__(self) -> Iterator[PageElement]:
+        yield from self.descendants
+
 
 # Aliases to make it easier to get started quickly, e.g. 'from bs4 import _soup'
 _s = BeautifulSoup
