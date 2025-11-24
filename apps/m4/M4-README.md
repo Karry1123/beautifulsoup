@@ -52,17 +52,10 @@ for node in soup:
 
 Five unit tests are implemented in `bs4/tests/test_soup_iteration.py`:
 
-1. **test_simple_iteration**: Tests basic iteration functionality, verifying the ability to traverse all nodes in a simple HTML document.
-
-2. **test_iteration_with_comments**: Tests iteration including comment nodes.
-
-3. **test_iteration_order**: Tests iteration order following document order.
-
-4. **test_iteration_with_nested_tags**: Tests iteration with deeply nested tags.
-
-5. **test_iteration_does_not_collect_to_list**: Verifies that the iteration is lazy-loaded and does not pre-collect all nodes into the list.
-
-All tests passed.
+```bash
+cd bs4\tests
+pytest test_soup_iteration.py
+```
 
 ## File Structure
 
